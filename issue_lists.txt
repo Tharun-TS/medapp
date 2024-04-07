@@ -63,3 +63,22 @@ Address         Port        Address         Port
 
 docker run --gpus all --shm-size 1g -p 3000:80 -v $volume:/data -e LOG_LEVEL=info,text_generation_router=debug ghcr.io/huggingface/text-generation-inference:1.4 --model-id TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num-shard 1
 localhost:3000/docs/
+
+Create a new repo:
+echo "# medapp" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Tharun-TS/medapp.git
+git push -u origin main
+
+Push to an existing repo:
+
+git remote add origin https://github.com/Tharun-TS/medapp.git
+git branch -M main
+git push -u origin main
+
+git config user.name "git username"
+git config user.email "git emailid"
+git config credential.username "git password"
