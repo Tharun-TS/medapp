@@ -1,0 +1,65 @@
+#Issue 1:
+		Unable to upload the vector data to pinecone server database
+		FIX CODE:
+		#import pinecone
+		from langchain.vectorstores import Pinecone as  PineconeVectorStore
+		#Initialize the PineCone database vector
+		pinecone.Pinecone(api_key=pinecone_api_key,
+					  environment=pinecone_api_env)
+		for name in pc.list_indexes().names():
+			print(name)
+		index_name = "med-app"
+		
+		#NEW CHANGES STARTING FROM HERE
+		index = pc.Index(index_name)
+		vectorstore = PineconeVectorStore(index, embed_model, "text")
+		vectorstore.add_texts(doc_list)
+		
+		NOTE: I have used the latest package versions of langchain and pinecone-client
+		
+#ISSUE2 : TOO SLOW
+		CMAKE_ARGS="-DLLAMA_CUBLAS=on"  FORCE_CMAKE=1 pip install --upgrade --force-reinstall llama-cpp-python --no-cache-dir
+		
+#Installing vsl in windows laptop
+		Unable to run VSL 
+		WslRegisterDistribution failed with error: 0x8004032d 
+		
+		FIX:
+		https://github.com/microsoft/WSL/issues/10508
+		# after reboot, verify the installation:
+		wsl.exe --status
+
+Installing conda in WSL : https://gist.github.com/kauffmanes/5e74916617f9993bc3479f401dfec7da
+Anaconda3 will now be installed into this location:
+/home/tharun/anaconda3
+conda config --set auto_activate_base false
+conda.exe create -n medapp_wsl python=3.8 anaconda
+The following environment is selected: ~/workspace/projects/MedicalApp/.conda
+
+Installed Anconda - do ./conda init inside anaconda3/bin/ -> ONly then "conda" command was recognisible
+Installed Python-wsl extension and jupyter-wsl extension -> Helped to set the python interpretor as the conda environement created inside the WSL.
+Installed Doker in Windows -> This is automatically ported to inside the WSL
+
+/home/tharun/workspace/projects/tgi_chat/text-generation-inference
+
+/home/tharun/workspace/projects/tgi_chat/text-generation-inference
+model=OpenAssistant/falcon-7b-sft-top1-696
+volume=$PWD/data
+docker run --gpus all --shm-size 1g -p 8080:80 -v $volume:/data -e LOG_LEVEL=info,text_generation_router=debug ghcr.io/huggingface/text-generation-inference:1.4 --model-id $model
+docker run --gpus all --shm-size 1g -p 8080:80 -v $volume:/data -e LOG_LEVEL=info,text_generation_router=debug ghcr.io/huggingface/text-generation-inference:1.4 --model-id TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num-shard 1
+
+Port forwarding:
+netsh interface portproxy show v4tov4
+netsh interface portproxy add v4tov4 listenport=8000 listenaddress=192.168.1.18 connectport=8000 connectaddress=$($(wsl hostname -I).Trim());
+
+>> netsh interface portproxy show v4tov4
+Listen on ipv4:             Connect to ipv4:
+
+Address         Port        Address         Port
+--------------- ----------  --------------- ----------
+192.168.1.18    8000        172.22.219.248  8000
+
+
+
+docker run --gpus all --shm-size 1g -p 3000:80 -v $volume:/data -e LOG_LEVEL=info,text_generation_router=debug ghcr.io/huggingface/text-generation-inference:1.4 --model-id TinyLlama/TinyLlama-1.1B-Chat-v1.0 --num-shard 1
+localhost:3000/docs/
